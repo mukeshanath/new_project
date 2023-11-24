@@ -5,7 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import store from './component/auth/store';
-
+const loginuser = localStorage.getItem('login_username');
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

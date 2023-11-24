@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const getInitialLoginName = () => {
   // Retrieve the login name from localStorage on page load
-  return localStorage.getItem('login_username') || null;
+  return localStorage.getItem('login_username') || "logout";
 };
 
 

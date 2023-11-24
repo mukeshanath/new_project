@@ -18,17 +18,27 @@ import { clearUserDetails,selectUserDetails } from '../component/auth/userSlice'
 
 export default function Topnavbar() {
 
-  const userDetails = useSelector((selectUserDetails));
+
+
+ const userDetails = useSelector((state) => {
+  if (state && state.user && state.user.userDetails) {
+    return state.user.userDetails.username;
+  }
+  return null; // or a default value as needed
+});
+
+
+ const loginuser = localStorage.getItem('login_username') || "logout";
   
    
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
   const my_pages = [ 'Solutions' , 'Products', 'ghg'];
-    const my_settings = ['Mukesh' || userDetails,'Logout'];
+    const my_settings = [ userDetails || loginuser,'Logout'];
 
     const [anchorElUser, setAnchorElUser] = useState(null);
-    const [username, setUsername] = useState([]);
+    // const [username, setUsername] = useState([]);
 
 
  
@@ -44,12 +54,12 @@ export default function Topnavbar() {
     };
 
 
-    useEffect(() => {
-      setUsername(userDetails);
-    });
+    // useEffect(() => {
+    //   setUsername(userDetails);
+    // });
 
 
-
+    console.log(userDetails);
 
 
    const setLogot = async(e) => { 
@@ -92,7 +102,7 @@ export default function Topnavbar() {
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open my_settings">
                 <IconButton onClick={handleOpenSettingsMenu} sx={{ p: 0 }}>
-                  <Avatar alt="emy Sharp" src="/static/images/avatar/2.jpg" />
+                  <Avatar alt={loginuser.toUpperCase()} src="/static/images/avatar/2.jpg" />
                 </IconButton>
               </Tooltip>
               <Menu
@@ -117,4 +127,9 @@ export default function Topnavbar() {
       </AppBar>
     );
 }
+
+
+
+
+
 
